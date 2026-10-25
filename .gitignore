@@ -1,0 +1,22 @@
+# Secrets / local settings
+.env
+.env.local
+.env*.local
+.claude/
+
+# Client data - never commit (bank statements, GL extracts, SOW, test runs)
+*.xlsx
+*.xls
+*.csv
+*.parquet
+*.docx
+*.log
+test_data/
+
+# Build output / dependencies
+node_modules/
+.next/
+.vercel
+*.tsbuildinfo
+__pycache__/
+*.pyc

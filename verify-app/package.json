@@ -1,0 +1,32 @@
+{
+  "name": "bank-recon-verify",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Read-only verification app: compares bank reconciliation matches (Fabric Warehouse) with the JDE source rows (Fabric Lakehouse)",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "mssql": "12.7.4",
+    "next": "15.5.28",
+    "react": "19.1.1",
+    "react-dom": "19.1.1"
+  },
+  "devDependencies": {
+    "@types/mssql": "9.1.5",
+    "@types/node": "20.14.10",
+    "@types/react": "19.1.8",
+    "@types/react-dom": "19.1.6",
+    "typescript": "5.5.3"
+  },
+  "overrides": {
+    "postcss": "8.5.31",
+    "tedious": "20.3.4"
+  }
+}
