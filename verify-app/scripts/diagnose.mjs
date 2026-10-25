@@ -8,15 +8,17 @@
 import fs from "node:fs";
 import sql from "mssql";
 
-// --- load .env.local without extra packages ---
+// --- load .env.local (dev) or .env (portable package) without extra packages ---
 const env = {};
-for (const line of fs.readFileSync(new URL("../.env.local", import.meta.url), "utf8").split(/\r?\n/)) {
+const envFile = [new URL("../.env.local", import.meta.url), new URL("../.env", import.meta.url)].find((f) => fs.existsSync(f));
+if (!envFile) { console.log("✗ No .env.local or .env found next to the app"); process.exit(1); }
+for (const line of fs.readFileSync(envFile, "utf8").split(/\r?\n/)) {
   const m = line.match(/^\s*([A-Z_]+)\s*=\s*(.*)\s*$/);
   if (m) env[m[1]] = m[2].replace(/^["']|["']$/g, "");
 }
 const need = ["RECON_TENANT_ID", "RECON_CLIENT_ID", "RECON_CLIENT_SECRET", "WAREHOUSE_SERVER", "WAREHOUSE_DATABASE",
               "LAKEHOUSE_SERVER", "LAKEHOUSE_DATABASE"];
-for (const k of need) if (!env[k]) { console.log(`✗ ${k} is empty in .env.local`); process.exit(1); }
+for (const k of need) if (!env[k]) { console.log(`✗ ${k} is empty in the .env file`); process.exit(1); }
 console.log(`Node ${process.version}`);
 
 // --- Stage 1: token ---

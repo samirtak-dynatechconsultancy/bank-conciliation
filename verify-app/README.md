@@ -87,3 +87,14 @@ links / IP allow-list), Vercel's dynamic IPs will be blocked – then host the a
 - GL lines are looked up by 6 of the 7 F0911 key parts (Line Extension Code is empty in the client data –
   `OPEN_ISSUES.md` #1).
 - Bank line numbers and amounts are shown as stored (×100 / cents) next to the converted values.
+
+## Portable package for a client PC (no Node / no install)
+
+```
+powershell -ExecutionPolicy Bypass -File packaging\build-package.ps1
+```
+
+Creates `dist\ReconVerify.zip` (~50 MB): the built app (Next.js standalone), a portable `node.exe`, `start.bat`,
+`diagnose.bat`, `.env.example` and `README.txt`. No `.env` is ever included. On the client PC: unzip, create `.env`
+from `.env.example`, run `diagnose.bat`, then `start.bat` (opens http://localhost:3000, reachable from that PC only).
+The build goes to `.next-package/`, so a running `npm run dev` is not affected.

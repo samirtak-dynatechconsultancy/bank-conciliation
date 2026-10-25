@@ -5,4 +5,8 @@ module.exports = {
   // the app shows no images - switch the image optimizer off entirely
   images: { unoptimized: true },
   poweredByHeader: false,
+  // self-contained server (server.js + only the node_modules it uses) for the portable client package
+  output: "standalone",
+  // the package script builds into its own folder so a running `npm run dev` (.next) is not disturbed
+  distDir: process.env.NEXT_DIST_DIR || ".next",
 };
